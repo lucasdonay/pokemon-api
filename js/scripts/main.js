@@ -181,7 +181,7 @@ function openDetailsPokemon() {
 
     let infoPokemon = {
       mainAbilitis: maiuscula(data.abilities[0].ability.name),
-      types: data.nome,
+      types: data.types,
       weight: data.weight,
       height: data.height,
       abilities: data.abilities,
@@ -189,8 +189,30 @@ function openDetailsPokemon() {
       urlType: data.types[0].type.url,
     };
 
-    heightPokemon.textContent = infoPokemon.height;
-    weightPokemon.textContent = infoPokemon.weight;
+    function listingTypesPokemon() {
+      const areaTypesModal = document.getElementById('js-types-pokemon');
+
+      areaTypesModal.innerHTML = '';
+
+      let arrayTypes = infoPokemon.types;
+
+      arrayTypes.forEach((item) => {
+        let itemList = document.createElement('li');
+        areaTypesModal.appendChild(itemList);
+
+        let spanList = document.createElement('span');
+
+        spanList.classList = `tag-type ${item.type.name}`;
+        spanList.textContent = item.type.name;
+
+        itemList.appendChild(spanList);
+      });
+    }
+
+    heightPokemon.textContent = ` ${infoPokemon.height / 10}m `;
+    weightPokemon.textContent = ` ${infoPokemon.weight / 10}kg `;
+
+    listingTypesPokemon();
   });
 }
 
